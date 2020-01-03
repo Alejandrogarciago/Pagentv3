@@ -1,0 +1,30 @@
+.table-header {
+    background-color: #f8f9fc;
+    color: #4e73df;
+    font-weight: 700;
+    
+}
+
+.table-link {
+    color: #64a0ed;
+    cursor: pointer;
+}
+
+.border-div {
+    border-radius: 25%;
+}
+
+.communication-table {
+    height: 300px;
+    overflow: scroll;
+}
+
+.user-photo {
+    width: 30px;
+    height: 30px;
+}
+
+a {
+    cursor: pointer;
+    color: #039be5;
+}

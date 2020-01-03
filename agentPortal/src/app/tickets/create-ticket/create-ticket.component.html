@@ -1,0 +1,52 @@
+<div class="modal-header">
+    <h5 class="modal-title" id="exampleModalLabel">Nuevo Ticket</h5>
+    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+<div class="modal-body">
+    <form class="form-horizontal" #form="ngForm" (submit)="onSubmit(form)">
+
+        <fieldset>
+            <div class="form-group">
+                <label class="col-md-12 control-label" for="department">Departamento</label>
+                <div class="col-md-12">
+                    <select #department class="form-control" name="department" ngModel (change)="selectDepartment($event, department.value)" required>
+                        <option *ngFor="let dep of department$ | async" [value]="dep.Department">{{dep.Department}}</option>
+                    </select>
+                  
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-md-12 control-label" for="category">Categoria</label>
+                <div class="col-md-12">
+                    <select #category class="form-control" name="category" ngModel (change)="selectCategory($event, category.value)" required> 
+                        <option *ngFor="let cat of category$ | async" [value]="cat.Category">{{cat.Category}}</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-md-12 control-label" for="subcategory">Sub Categoria</label>
+                <div class="col-md-12">
+                    <select #subCategory  class="form-control" name="subcategory" ngModel (change)="selectSubcategory($event, subCategory.value)" required>
+                        <option *ngFor="let sub of subcategory$ | async" [value]="sub.Subcategory">{{sub.Subcategory}}</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-md-12 control-label" for="description">Descripcion</label>
+                <div class="col-md-12">
+                    <select id="description"  class="form-control" name="description" ngModel required>
+                        <option *ngFor="let desc of description$ | async" [value]="desc.Description">{{desc.Description}}</option>
+                    </select>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                <button type="submit" class="btn btn-primary">Enviar</button>
+            </div>
+        </fieldset>
+    </form>
+</div>
