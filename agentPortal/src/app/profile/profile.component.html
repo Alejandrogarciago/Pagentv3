@@ -1,150 +1,223 @@
 <div class="container-fluid pt-4" *ngIf="item | async as userProfile">
 
-        <div class="row">
-                <div class="col-md-4">
-                        <div class="card shadow-lg">
-                                <img src="https://www.setaswall.com/wp-content/uploads/2017/04/Material-Wallpaper-30-1600x900.jpg"
-                                        class="card-img-top" alt="">
-                                <div class="card-body text-center">
-                                        <div *ngIf="downloadURL | async; let srcURL">
-                                                <img [src]="srcURL" alt="" class="rounded-circle profile-image"
-                                                        #photoURL>
-                                        </div>
-                                        <div class="alert alert-danger" role="alert" *ngIf="error">
-                                                {{error}}
-                                        </div>
+    <div class="row mb-4">
+        <div class="col-md-4">
+            <div class="card shadow-lg">
+                <img src="https://www.setaswall.com/wp-content/uploads/2017/04/Material-Wallpaper-30-1600x900.jpg"
+                    class="card-img-top" alt="">
+                <div class="card-body text-center">
+                    <div *ngIf="downloadURL | async; let srcURL">
+                        <img [src]="srcURL" alt="" class="rounded-circle profile-image" #photoURL>
+                    </div>
+                    <div class="alert alert-danger" role="alert" *ngIf="error">
+                        {{error}}
+                    </div>
 
-                                        <div class="row">
+                    <div class="row">
 
-                                                <div class="col-md-2"></div>
+                        <div class="col-md-2"></div>
 
-                                                <div class="custom-file">
+                        <div class="custom-file">
 
-                                                        <input type="file" #fileInput (change)="fileChange($event)"
-                                                                class="custom-file-input" id="customFile"
-                                                                accept=".png,.jpg">
-                                                        <label class="custom-file-label" for="customFile">Choose Profile
-                                                                Image</label>
-                                                </div>
-                                        </div>
-                                        <h3>{{userProfile.displayName}}</h3>
-                                        <h4>{{userProfile.campaign}} {{userProfile.position}}</h4>
-                                        <h5></h5>
-
-                                </div>
+                            <input type="file" #fileInput (change)="fileChange($event)" class="custom-file-input"
+                                id="customFile" accept=".png,.jpg">
+                            <label class="custom-file-label" for="customFile">Choose Profile
+                                Image</label>
                         </div>
+                    </div>
                 </div>
-                <div class="col-md-8">
-                        <div class="card gedf-card shadow-lg">
-                                <div class="card-header">
-                                        <ul class="nav nav-tabs card-header-tabs" id="myTab" role="tablist">
-                                                <li class="nav-item">
-                                                        <a class="nav-link active" id="personal-tab" data-toggle="tab"
-                                                                href="#personal" role="tab" aria-controls="personal"
-                                                                aria-selected="true">Personal</a>
-                                                </li>
-                                                <li class="nav-item">
-                                                        <a class="nav-link" id="operational-tab" data-toggle="tab"
-                                                                role="tab" aria-controls="operational"
-                                                                aria-selected="false"
-                                                                href="#operational">Operational</a>
-                                                </li>
-                                        </ul>
-                                </div>
-                                <div class="card-body">
-                                        <div class="tab-content" id="myTabContent">
-                                                <div class="tab-pane fade show active" id="personal" role="tabpanel"
-                                                        aria-labelledby="personal-tab">
-                                                        <form #profileForm="ngForm" (submit)="onSubmit(profileForm)"
-                                                                [class.loading]="loading">
-                                                                <div class="form-row">
-                                                                        <div class="form-group col-md-4">
-                                                                                <label for="firstName">Nombre</label>
-                                                                                <input type="text" class="form-control"
-                                                                                        id="firstName"
-                                                                                        value="{{userProfile.name}}"
-                                                                                        name="firstName"
-                                                                                        [ngModel]="userProfile.firstName">
-                                                                        </div>
-                                                                        <div class="form-group col-md-4">
-                                                                                <label for="lastName">Apellido
-                                                                                        Paterno</label>
-                                                                                <input type="text" class="form-control"
-                                                                                        id="lastName"
-                                                                                        value="{{userProfile.lastName}}"
-                                                                                        name="lastName"
-                                                                                        [ngModel]="userProfile.lastName">
-                                                                        </div>
-                                                                        <div class="form-group col-md-4">
-                                                                                <label for="motherLastName">Apellido
-                                                                                        Materno</label>
-                                                                                <input type="text" class="form-control"
-                                                                                        id="motherLastName"
-                                                                                        value="{{userProfile.motherLastName}}"
-                                                                                        name="motherLastName"
-                                                                                        [ngModel]="userProfile.motherLastName">
-                                                                        </div>
-                                                                </div>
-                                                                <div class="form-row">
-                                                                        <div class="form-group col-md-6">
-                                                                                <label for="email">Correo
-                                                                                        Electronico</label>
-                                                                                <input type="email" class="form-control"
-                                                                                        id="email"
-                                                                                        value="{{userProfile.email}}"
-                                                                                        name="email"
-                                                                                        [ngModel]="userProfile.email">
-                                                                        </div>
-                                                                        <div class="form-group col-md-3">
-                                                                                <label for="birthday">Fecha de
-                                                                                        Nacimiento
-                                                                                </label>
-                                                                                <input type="date" class="form-control"
-                                                                                        id="birthday"
-                                                                                        value="{{userProfile.birthday}}"
-                                                                                        name="birthday"
-                                                                                        [ngModel]="userProfile.birthday">
-                                                                        </div>
-                                                                        <div class="form-group col-md-3">
-                                                                                <label for="gender">Sexo
-                                                                                </label>
-                                                                                <input type="text" class="form-control"
-                                                                                        id="gender"
-                                                                                        value="{{userProfile.gender}}"
-                                                                                        name="gender"
-                                                                                        [ngModel]="userProfile.gender">
-                                                                        </div>
-                                                                </div>
-                                                                <div class="form-row">
-                                                                        <div class="form-group col-md-6">
-                                                                                <label for="role">Role</label>
-                                                                                <select name="role" id="role"
-                                                                                        [ngModel]="userProfile.role"
-                                                                                        class="form-control">
-                                                                                        <option value="agent">agent
-                                                                                        </option>
-                                                                                        <option value="Staff">Staff
-                                                                                        </option>
-                                                                                </select>
-                                                                        </div>
-
-                                                                </div>
-                                                                <button type="submit"
-                                                                        class="btn btn-primary">Submit</button>
-                                                        </form>
-
-                                                        <p *ngIf="userProfile.role == 'Staff'">I am Staff</p>
-
-                                                </div>
-                                                <div class="tab-pane fade" id="operational" role="tabpanel"
-                                                        aria-labelledby="operational-tab">
-                                                        <div class="form-group">
-                                                        </div>
-                                                        <div class="py-4"></div>
-                                                </div>
-                                        </div>
-                                </div>
-                        </div>
-                </div>
+            </div>
         </div>
+        <div class="col-md-8">
+            <div class="card gedf-card shadow-lg">
+                <div class="card-header">
+                    <ul class="nav nav-tabs card-header-tabs" id="myTab" role="tablist">
+                        <li class="nav-item">
+                            <a class="nav-link active" id="personal-tab" data-toggle="tab" href="#personal" role="tab"
+                                aria-controls="personal" aria-selected="true">Personal</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" id="operational-tab" data-toggle="tab" role="tab"
+                                aria-controls="operational" aria-selected="false" href="#operational">Operational</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" id="finanze-tab" data-toggle="tab" role="tab" aria-controls="finanze"
+                                aria-selected="false" href="#finanze">Finanzas</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" id="security-tab" data-toggle="tab" role="tab" aria-controls="security"
+                                aria-selected="false" href="#security">Seguridad</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" id="recruitment-tab" data-toggle="tab" role="tab"
+                                aria-controls="recruitment" aria-selected="false" href="#recruitment">Reclutamiento</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="card-body">
+                    <div class="tab-content" id="myTabContent">
+                        <div class="tab-pane fade show active" id="personal" role="tabpanel"
+                            aria-labelledby="personal-tab">
+                            <form #profileForm="ngForm" (submit)="onSubmit(profileForm)" [class.loading]="loading">
+                                <div class="form-row">
+                                    <div class="form-group col-md-4">
+                                        <label for="firstName">Nombre</label>
+                                        <input type="text" class="form-control" id="firstName"
+                                            value="{{userProfile.name}}" name="firstName"
+                                            [ngModel]="userProfile.firstName">
+                                    </div>
+                                    <div class="form-group col-md-4">
+                                        <label for="lastName">Apellido
+                                            Paterno</label>
+                                        <input type="text" class="form-control" id="lastName"
+                                            value="{{userProfile.lastName}}" name="lastName"
+                                            [ngModel]="userProfile.lastName">
+                                    </div>
+                                    <div class="form-group col-md-4">
+                                        <label for="motherLastName">Apellido
+                                            Materno</label>
+                                        <input type="text" class="form-control" id="motherLastName"
+                                            value="{{userProfile.motherLastName}}" name="motherLastName"
+                                            [ngModel]="userProfile.motherLastName">
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-group col-md-6">
+                                        <label for="email">Correo
+                                            Electronico</label>
+                                        <input type="email" class="form-control" id="email"
+                                            value="{{userProfile.email}}" name="email" [ngModel]="userProfile.email">
+                                    </div>
+                                    <div class="form-group col-md-3">
+                                        <label for="birthday">Fecha de
+                                            Nacimiento
+                                        </label>
+                                        <input type="date" class="form-control" id="birthday"
+                                            value="{{userProfile.birthday}}" name="birthday"
+                                            [ngModel]="userProfile.birthday">
+                                    </div>
+                                    <div class="form-group col-md-3">
+                                        <label for="gender">Sexo
+                                        </label>
+                                        <input type="text" class="form-control" id="gender"
+                                            value="{{userProfile.gender}}" name="gender" [ngModel]="userProfile.gender">
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-group col-md-6">
+                                        <label for="role">Role</label>
+                                        <select name="role" id="role" [ngModel]="userProfile.role" class="form-control">
+                                            <option value="agent">agent
+                                            </option>
+                                            <option value="Staff">Staff
+                                            </option>
+                                        </select>
+                                    </div>
+
+                                </div>
+                                <button type="submit" class="btn btn-primary">Submit</button>
+                            </form>
+                        </div>
+                        <div class="tab-pane fade" id="operational" role="tabpanel" aria-labelledby="operational-tab">
+                            <form #operationalForm="ngForm" (submit)="onSubmit(operationalForm)"
+                                [class.loading]="loading">
+                                <div class="form-row">
+                                    <div class="form-group col-md-4">
+                                        <label for="avayaId">Avaya ID</label>
+                                        <input type="text" class="form-control" id="avayaId"
+                                            value="{{userProfile.avayaId}}" name="avayaId"
+                                            [ngModel]="userProfile.avayaId">
+                                    </div>
+                                    <div class="form-group col-md-4">
+                                        <label for="unifyId">Unify ID</label>
+                                        <input type="text" class="form-control" id="unifyId"
+                                            value="{{userProfile.unifyId}}" name="unifyId"
+                                            [ngModel]="userProfile.unifyId">
+                                    </div>
+                                    <div class="form-group col-md-4">
+                                        <label for="five9User">Five9 User</label>
+                                        <input type="text" class="form-control" id="five9User"
+                                            value="{{userProfile.five9User}}" name="five9User"
+                                            [ngModel]="userProfile.five9User">
+                                    </div>
+                                </div>
+                                <button type="submit" class="btn btn-primary">Submit</button>
+                            </form>
+                            <div class="py-4"></div>
+                        </div>
+                        <div class="tab-pane fade" id="finanze" role="tabpanel" aria-labelledby="finanze-tab">
+                            <form #finanzeForm="ngForm" (submit)="onSubmit(finanzeForm)" [class.loading]="loading">
+                                <div class="form-row">
+                                    <div class="form-group col-md-4">
+                                        <label for="costCenter">Centro de Costo</label>
+                                        <input type="text" class="form-control" id="costCenter"
+                                            value="{{userProfile.costCenter}}" name="costCenter"
+                                            [ngModel]="userProfile.costCenter">
+                                    </div>
+                                    <div class="form-group col-md-4">
+                                        <label for="costCenterDescription">Descripcion de Centro de Costos</label>
+                                        <input type="text" class="form-control" id="costCenterDescription"
+                                            value="{{userProfile.costCenterDescription}}" name="costCenterDescription"
+                                            [ngModel]="userProfile.costCenterDescription">
+                                    </div>
+                                    <div class="form-group col-md-4">
+                                        <label for="kronosId">Kronos ID</label>
+                                        <input type="text" class="form-control" id="kronosId"
+                                            value="{{userProfile.kronosId}}" name="kronosId"
+                                            [ngModel]="userProfile.kronosId">
+                                    </div>
+                                </div>
+                                <button type="submit" class="btn btn-primary">Submit</button>
+                            </form>
+                            <div class="py-4"></div>
+                        </div>
+                        <div class="tab-pane fade" id="security" role="tabpanel" aria-labelledby="security-tab">
+                            <form #securityForm="ngForm" (submit)="onSubmit(securityForm)" [class.loading]="loading">
+                                <div class="form-row">
+                                    <div class="form-group col-md-4">
+                                        <label for="badgeNumber">Badge Number</label>
+                                        <input type="text" class="form-control" id="badgeNumber"
+                                            value="{{userProfile.badgeNumber}}" name="badgeNumber"
+                                            [ngModel]="userProfile.badgeNumber">
+                                    </div>
+                                </div>
+                                <button type="submit" class="btn btn-primary">Submit</button>
+                            </form>
+                            <div class="py-4"></div>
+                        </div>
+                        <div class="tab-pane fade" id="recruitment" role="tabpanel" aria-labelledby="recruitment-tab">
+                            <form #recruitmentForm="ngForm" (submit)="onSubmit(recruitmentForm)" [class.loading]="loading">
+                                <div class="form-row">
+                                    <div class="form-group col-md-4">
+                                        <label for="agency">Agencia</label>
+                                        <input type="text" class="form-control" id="agency"
+                                            value="{{userProfile.agency}}" name="agency"
+                                            [ngModel]="userProfile.agency">
+                                    </div>
+                                    <div class="form-group col-md-4">
+                                        <label for="experienceCallCenter">Experiencia en Call Center</label>
+                                        <input type="text" class="form-control" id="experienceCallCenter"
+                                            value="{{userProfile.experienceCallCenter}}" name="experienceCallCenter"
+                                            [ngModel]="userProfile.experienceCallCenter">
+                                    </div>
+                                    <div class="form-group col-md-4">
+                                        <label for="Language">Lenguaje</label>
+                                        <input type="text" class="form-control" id="Language"
+                                            value="{{userProfile.Language}}" name="Language"
+                                            [ngModel]="userProfile.Language">
+                                    </div>
+                                </div>
+                                <button type="submit" class="btn btn-primary">Submit</button>
+                            </form>
+                            <div class="py-4"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <app-paystub class="col"></app-paystub>
+    </div>
 </div>

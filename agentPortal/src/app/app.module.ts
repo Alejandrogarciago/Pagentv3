@@ -24,6 +24,7 @@ import { TicketsComponent } from './tickets/tickets.component';
 import { CreateTicketComponent } from './tickets/create-ticket/create-ticket.component';
 import { TicketDetailsComponent } from './tickets/ticket-details/ticket-details.component';
 import { TicketListComponent } from './tickets/ticket-list/ticket-list.component';
+import { PaystubComponent } from './profile/paystub/paystub.component';
 
 
 
@@ -35,7 +36,8 @@ import { TicketListComponent } from './tickets/ticket-list/ticket-list.component
     TicketsComponent,
     CreateTicketComponent,
     TicketDetailsComponent,
-    TicketListComponent
+    TicketListComponent,
+    PaystubComponent
     
     
   ],

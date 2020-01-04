@@ -13,8 +13,8 @@
         <!-- Login Form -->
         <form #form="ngForm" (submit)="onSubmit(form)" [class.loading]="loading">
             <input type="text" id="login" class="fadeIn second" name="email" placeholder="NT Login" ngModel>
-            <input type="text" id="password" class="fadeIn third" name="password" placeholder="password" ngModel>
-
+            <input type="password" id="password" class="fadeIn third" name="password" placeholder="password" ngModel>
+         
             <input type="submit" class="fadeIn fourth">
         </form>
 
@@ -24,3 +24,4 @@
         </div>
     </div>
 </div>
+

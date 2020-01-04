@@ -70,31 +70,23 @@
                 </div>
             </div>
         </div> -->
-
-        <div class="row">
-            <div class="col">
-
-            </div>
-            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-                <div class="row">
-                    
-                    <span>Nuevo Ticket </span>
-                </div>
-            </button>
-
-            <!-- Modal -->
-            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-                aria-hidden="true">
-                <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                        <app-create-ticket></app-create-ticket>
-                    </div>
-                </div>
-            </div>
-        </div>
     </div>
+   
     <div class="pt-4">
+        <h4>Tickets</h4>
+        <a class="btn btn-primary text-white mb-2" data-toggle="modal" data-target="#newTickeModal">
+            <span>Nuevo Ticket</span>
+        </a>
         <app-ticket-list></app-ticket-list>
     </div>
+</div>
 
+<!-- Modal -->
+<div class="modal fade" id="newTickeModal" tabindex="-1" role="dialog" aria-labelledby="newTickeModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <app-create-ticket></app-create-ticket>
+        </div>
+    </div>
 </div>

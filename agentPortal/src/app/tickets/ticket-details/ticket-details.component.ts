@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, SimpleChanges } from '@angular/core';
 import { AngularFirestoreDocument, AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
 import { Ticket } from '../ticket.model';
 import { Observable } from 'rxjs';
@@ -13,12 +13,16 @@ export class TicketDetailsComponent implements OnInit {
   private ticketDoc: AngularFirestoreDocument<Ticket>;
   ticket: Observable<any>;
 
-  constructor( public afs: AngularFirestore) { }
+  constructor(public afs: AngularFirestore) { }
 
   ngOnInit() {
   }
 
-  keyChange(){
+  keyChange() {
+
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
     this.ticketDoc = this.afs.doc<Ticket>(`tickets/${this.key}`);
     this.ticket = this.ticketDoc.valueChanges();
   }
