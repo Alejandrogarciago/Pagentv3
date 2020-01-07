@@ -1,17 +1,16 @@
 <div *ngIf="paystub | async as paystub ">
     <h4 class="mb-2">Mis recibos de Nomina</h4>
-    <p>{{ paystub['likes'] }}</p>
+    <!-- <p>{{ paystub | json }}</p> -->
     <table class="table table-hover table-borderless shadow bg-white table-striped table-sm ">
         <thead>
             <tr class="table-header shadow-sm">
-                <th scope="col">Usuario</th>
-                <th scope="col">Ticket ID</th>
-                <th scope="col">Departamento</th>
-                <th scope="col">Categoria</th>
+                <th scope="col">Periodo de Pago</th>
+                <th scope="col">Pago Bruto</th>
+                <th scope="col">Descuento</th>
+                <th scope="col">Pago Neto</th>
                 <th scope="col">Subcategoria</th>
-                <th scope="col">Descripcion</th>
-                <th scope="col">Status</th>
-                <th scope="col">Calificacion</th>
+                <th scope="col">Descargar PDF</th>
+           
             </tr>
         </thead>
         <tbody *ngIf="item | async as ticket">
@@ -21,9 +20,6 @@
                         <img class="mx-auto rounded-circle user-photo" [src]="ticket.userPhotoURL" alt="">
                     </a>
                 </th>
-                <td></td>
-                <td></td>
-                <td></td>
                 <td></td>
                 <td></td>
                 <td></td>

@@ -7,6 +7,7 @@ import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import uniqBy from 'lodash/uniqBy';
 import { Router } from '@angular/router';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 class TicketOption {
     Category: string;
@@ -30,8 +31,16 @@ export class CreateTicketComponent implements OnInit {
     subcategory$: Observable<any>;
     loading = false;
     modalStatus: string;
+    freshDeskUri = 'https://sykes-help.freshdesk.com/api/v2/tickets'
+    freshdeskHeader = {
+        headers: new HttpHeaders()
+          .set('Authorization',  `Basic bUc0GpqwEaldJJ3uL`)
+      }
+    freshDeskKey = 'bUc0GpqwEaldJJ3uL'
+   
 
-    constructor(private afs: AngularFirestore, private afAuth: AngularFireAuth,  private router: Router,) {
+
+    constructor(private afs: AngularFirestore, private afAuth: AngularFireAuth, private router: Router, private http: HttpClient) {
         this.itemDoc = this.afs.collection<TicketOption>('ticketOptions');
         this.department$ = this.itemDoc.valueChanges()
             .pipe(
@@ -96,9 +105,30 @@ export class CreateTicketComponent implements OnInit {
             score: 0
 
         };
+        
         ngForm.reset();
+        let headers = new HttpHeaders().set('Authentication', 'bUc0GpqwEaldJJ3uL')
+        this.http.post('https://sykes-help.freshdesk.com/api/v2/tickets',
+            {
+                "description": ticket,
+                "subject": `Nomina - ${user.displayName}`,
+                "email": user.email,
+                "priority": 1,
+                "status": 2,
+            },{ headers}).subscribe(
+                (val) => {
+                    console.log("POST call successful value returned in body", 
+                                val);
+                },
+                response => {
+                    console.log("POST call in error", response);
+                },
+                () => {
+                    console.log("The POST observable is now completed.");
+                });
         return this.afs.doc(`tickets/${id}`).set(ticket);
         
+
     }
-    
+
 }

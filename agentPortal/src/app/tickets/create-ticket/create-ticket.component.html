@@ -31,6 +31,7 @@
                 <div class="col-md-12">
                     <select #subCategory  class="form-control" name="subcategory" ngModel (change)="selectSubcategory($event, subCategory.value)" required>
                         <option *ngFor="let sub of subcategory$ | async" [value]="sub.Subcategory">{{sub.Subcategory}}</option>
+                        <option value="Otro">Otro</option>
                     </select>
                 </div>
             </div>
@@ -40,6 +41,7 @@
                 <div class="col-md-12">
                     <select id="description"  class="form-control" name="description" ngModel required>
                         <option *ngFor="let desc of description$ | async" [value]="desc.Description">{{desc.Description}}</option>
+                        <option value="Otro">Otro</option>
                     </select>
                 </div>
             </div>
