@@ -8,6 +8,8 @@ import { map } from 'rxjs/operators';
 import uniqBy from 'lodash/uniqBy';
 import { Router } from '@angular/router';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { ViewChild, ElementRef } from '@angular/core';
+
 
 class TicketOption {
     Category: string;
@@ -24,6 +26,8 @@ class TicketOption {
     styleUrls: ['./create-ticket.component.css']
 })
 export class CreateTicketComponent implements OnInit {
+
+    @ViewChild('closeAddExpenseModal', { static: false }) closeAddTicketModal: ElementRef;
     private itemDoc: AngularFirestoreCollection<TicketOption>;
     department$: Observable<any>;
     category$: Observable<any>;
@@ -34,10 +38,10 @@ export class CreateTicketComponent implements OnInit {
     freshDeskUri = 'https://sykes-help.freshdesk.com/api/v2/tickets'
     freshdeskHeader = {
         headers: new HttpHeaders()
-          .set('Authorization',  `Basic bUc0GpqwEaldJJ3uL`)
-      }
+            .set('Authorization', `Basic bUc0GpqwEaldJJ3uL`)
+    }
     freshDeskKey = 'bUc0GpqwEaldJJ3uL'
-   
+
 
 
     constructor(private afs: AngularFirestore, private afAuth: AngularFireAuth, private router: Router, private http: HttpClient) {
@@ -105,7 +109,7 @@ export class CreateTicketComponent implements OnInit {
             score: 0
 
         };
-        
+
         ngForm.reset();
         let headers = new HttpHeaders().set('Authentication', 'bUc0GpqwEaldJJ3uL')
         this.http.post('https://sykes-help.freshdesk.com/api/v2/tickets',
@@ -115,10 +119,10 @@ export class CreateTicketComponent implements OnInit {
                 "email": user.email,
                 "priority": 1,
                 "status": 2,
-            },{ headers}).subscribe(
+            }, { headers }).subscribe(
                 (val) => {
-                    console.log("POST call successful value returned in body", 
-                                val);
+                    console.log("POST call successful value returned in body",
+                        val);
                 },
                 response => {
                     console.log("POST call in error", response);
@@ -126,8 +130,9 @@ export class CreateTicketComponent implements OnInit {
                 () => {
                     console.log("The POST observable is now completed.");
                 });
+        this.closeAddTicketModal.nativeElement.click();
         return this.afs.doc(`tickets/${id}`).set(ticket);
-        
+
 
     }
 

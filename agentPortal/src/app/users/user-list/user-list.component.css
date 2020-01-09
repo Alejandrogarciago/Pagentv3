@@ -1,0 +1,9 @@
+.user-photo {
+    width: 30px;
+    height: 30px;
+}
+
+a {
+    cursor: pointer;
+    color: #039be5;
+}

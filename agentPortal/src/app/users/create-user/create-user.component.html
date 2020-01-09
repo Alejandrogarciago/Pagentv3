@@ -1,0 +1,95 @@
+<div class="modal-header">
+    <h5 class="modal-title" id="newUserModalLabel">Nuevo Usuario</h5>
+    <button type="button" class="close" data-dismiss="modal" aria-label="Close" #closeCreateUserModal
+        (click)="modalClose()">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+<div class="modal-body">
+    <form class="form-horizontal" #newUser="ngForm" (submit)="onSubmit(newUser)">
+        <div class="alert alert-danger" role="alert" *ngIf="error">
+            <a type="button" class="close" data-dismiss="modal" aria-label="Close" #closeCreateUserModal
+                (click)="modalClose()">
+                <span aria-hidden="true">&times;</span>
+            </a>
+            {{ error }}
+        </div>
+        <div class="alert alert-success" role="alert" *ngIf="result">
+            <a type="button" class="close" data-dismiss="modal" aria-label="Close" #closeCreateUserModal
+                (click)="modalClose()">
+                <span aria-hidden="true">&times;</span>
+            </a>
+            {{ result }}
+        </div>
+        <div class="form-group">
+            <div class="col-md-12">
+                <input type="text" class="form-control" id="name" name="name" placeholder="Nombre" ngModel>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-12">
+                <input type="text" class="form-control" id="secondName" name="secondName" placeholder="Segundo Nombre"
+                    ngModel>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-12">
+                <input type="text" class="form-control" id="lastName" name="lastName" placeholder="Apellido Paterno"
+                    ngModel>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-12">
+                <input type="text" class="form-control" id="secondLastName" name="secondLastName"
+                    placeholder="Apellido Materno" ngModel>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-12">
+                <input type="text" class="form-control" id="user" name="user" placeholder="Usuario" ngModel>
+
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-12">
+                <input type="text" class="form-control" id="password" name="password" placeholder="Contraseña" ngModel>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-12">
+                <div class="custom-file">
+                    <input type="file" #fileInput (change)="fileChange($event)" class="custom-file-input" id="file"
+                        accept=".png,.jpg">
+                    <label class="custom-file-label" for="file">Imagen de Perfil</label>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-12">
+                <div class="form-group" *ngIf="downloadURL | async; let srcURL">
+                    <input type="text" class="form-control" id="firstName" value="{{srcURL}}" name="imagePath"
+                        [ngModel]="srcURL" readonly>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="role" class="col-12">Choose Profile</label>
+            <div class="col-md-12">
+
+                <select class="form-control" id="role" name="role" placeholder="Contraseña" ngModel>
+                    <option>Agent</option>
+                    <option>Staff</option>
+                    <option>Admin</option>
+                </select>
+            </div>
+        </div>
+
+
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="modalClose()">Cerrar</button>
+            <button type="submit" class="btn btn-primary" (click)="modalClose()">Crear Usuario</button>
+        </div>
+
+    </form>
+</div>

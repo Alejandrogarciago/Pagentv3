@@ -1,0 +1,27 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col  mt-4">
+            <!-- New user trigger modal -->
+            <a class="btn btn-primary text-white" data-toggle="modal" data-target="#newUserModal">
+                <i class="fas fa-plus"></i>
+                <span> new user</span>
+            </a>
+        </div>
+    </div>
+    <div class="row mt-4">
+        <div class="col">
+            <app-user-list></app-user-list>
+        </div>
+
+    </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="newUserModal" tabindex="-1" role="dialog" aria-labelledby="newUserModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <app-create-user></app-create-user>
+        </div>
+    </div>
+</div>
