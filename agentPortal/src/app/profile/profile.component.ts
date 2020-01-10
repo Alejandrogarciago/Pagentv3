@@ -16,7 +16,7 @@ import { finalize } from 'rxjs/operators';
 })
 export class ProfileComponent implements OnInit {
   private itemDoc: AngularFirestoreDocument<UserProfile>;
-  item: Observable<UserProfile>;
+  profile: Observable<UserProfile>;
   uid: string;
   loading = false;
   error: string;
@@ -34,7 +34,7 @@ export class ProfileComponent implements OnInit {
 
   ngOnInit() {
     this.itemDoc = this.afs.doc<any>(`users/${this.uid}`);
-    this.item = this.itemDoc.valueChanges();
+    this.profile = this.itemDoc.valueChanges();
   }
 
   async onSubmit(ngForm: NgForm) {

@@ -25,24 +25,18 @@ const adminOnly = () => pipe(
   map(claims => claims.admin === true || [''])
 );
 
-const redirectLoggedInToProfileOrUsers = (next) =>
+const redirectLoggedInToProfileOrUsers = () =>
   pipe(
     customClaims,
-    map(
-      claims => {
-        // if no claims, no authenticated user 
-        // so allow route ['']
-        if (claims.length = 0) {
-          return true;
-        }
-
-        // if a user claims is set redirect t0 ['users']
-        if (claims.admin) {
-          return ['users']
-        }
-
-        return ['profile', claims.user.id]
-      })
+    map(claims => {
+      if (claims.length === 0) {
+        return true;
+      }
+      if (claims.admin) {
+        return ['users']
+      }
+      return ['profile', claims.user_id]
+    })
   );
 
 const onlyAllowSelfOrAdmin = (next) =>
@@ -51,15 +45,14 @@ const onlyAllowSelfOrAdmin = (next) =>
     map(claims => {
       // if no claims, no authenticated user 
       // so allow route ['']
-      if (claims.length = 0) {
+      if (claims.length === 0) {
         return [''];
       }
-      return next.params.id === claims.user.id || claims.admin;
+      return next.params.id === claims.user_id || claims.admin;
 
     })
   )
 const routes: Routes = [
-
 
   {
     path: '', component: LoginComponent, canActivate: [AngularFireAuthGuard],
@@ -67,7 +60,7 @@ const routes: Routes = [
   },
 
   {
-    path: 'tickets', component: TicketsComponent, children: [
+    path: 'tickets', component: TicketsComponent, canActivate: [AngularFireAuthGuard], children: [
       { path: 'details', component: TicketDetailsComponent },
       { path: 'list', component: TicketListComponent },]
   },

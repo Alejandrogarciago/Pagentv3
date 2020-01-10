@@ -25,11 +25,12 @@ import { TicketsComponent } from './tickets/tickets.component';
 import { CreateTicketComponent } from './tickets/create-ticket/create-ticket.component';
 import { TicketDetailsComponent } from './tickets/ticket-details/ticket-details.component';
 import { TicketListComponent } from './tickets/ticket-list/ticket-list.component';
-import { PaystubComponent } from './profile/paystub/paystub.component';
+import { PaystubComponent } from './finanze/paystub/paystub.component';
 import { UsersComponent } from './users/users.component';
 import { CreateUserComponent } from './users/create-user/create-user.component';
 import { UserListComponent } from './users/user-list/user-list.component';
 import { UserDetailsComponent } from './users/user-details/user-details.component';
+import { FinanzeComponent } from './finanze/finanze.component';
 
 
 
@@ -46,7 +47,8 @@ import { UserDetailsComponent } from './users/user-details/user-details.componen
     UsersComponent,
     CreateUserComponent,
     UserListComponent,
-    UserDetailsComponent
+    UserDetailsComponent,
+    FinanzeComponent
     
     
   ],

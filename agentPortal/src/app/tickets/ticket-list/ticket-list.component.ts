@@ -17,12 +17,12 @@ export class TicketListComponent implements OnInit {
 
   constructor(private afs: AngularFirestore, private afAuth: AngularFireAuth ) {
     this.user = afAuth.auth.currentUser;
-    
+    this.itemDoc = this.afs.collection<Ticket>('tickets', ref => ref.where('uid', '==', this.user.uid));
+    this.item = this.itemDoc.valueChanges();
    }
 
   ngOnInit() {
-    this.itemDoc = this.afs.collection<Ticket>('tickets');
-    this.item = this.itemDoc.valueChanges();
+
   }
   selectKey($event) {
     this.key = $event.target.innerHTML;
