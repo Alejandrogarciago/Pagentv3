@@ -3,7 +3,6 @@ import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { environment } from '../environments/environment';
@@ -12,14 +11,9 @@ import { AngularFireAuthModule } from '@angular/fire/auth';
 import { AngularFireAuthGuard } from '@angular/fire/auth-guard';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { AngularFireStorageModule } from '@angular/fire/storage';
-
-
-import { LoginComponent } from './login/login.component';
-
-
-
-
 import {  AngularFireDatabase } from '@angular/fire/database';
+
+import { DataTablesModule } from 'angular-datatables';
 import { ProfileComponent } from './profile/profile.component';
 import { TicketsComponent } from './tickets/tickets.component';
 import { CreateTicketComponent } from './tickets/create-ticket/create-ticket.component';
@@ -31,6 +25,8 @@ import { CreateUserComponent } from './users/create-user/create-user.component';
 import { UserListComponent } from './users/user-list/user-list.component';
 import { UserDetailsComponent } from './users/user-details/user-details.component';
 import { FinanzeComponent } from './finanze/finanze.component';
+import { LoginComponent } from './login/login.component';
+
 
 
 
@@ -61,7 +57,9 @@ import { FinanzeComponent } from './finanze/finanze.component';
     AngularFireAuthModule,
     AngularFirestoreModule,
     AngularFireStorageModule,
-    HttpClientModule
+    HttpClientModule,
+    DataTablesModule
+
   ],
   providers: [AngularFireAuthGuard, AngularFireDatabase],
   bootstrap: [AppComponent]

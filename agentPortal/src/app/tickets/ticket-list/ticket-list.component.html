@@ -1,6 +1,6 @@
 <div class="row">
   <div class="col-md-12 border-div">
-    <table class="table table-hover table-borderless shadow bg-white table-striped table-sm ">
+    <table datatable [dtOptions]="dtOptions" class="row-border hover shadow-sm" *ngIf="item | async as ticket">
       <thead>
         <tr class="table-header shadow-sm">
           <th scope="col">Usuario</th>
@@ -13,7 +13,7 @@
           <th scope="col">Calificacion</th>
         </tr>
       </thead>
-      <tbody *ngIf="item | async as ticket">
+      <tbody>
         <tr *ngFor="let ticket of ticket">
           <th scope="row">
             <a>
@@ -27,18 +27,30 @@
           <td>{{ticket.category}}</td>
           <td>{{ticket.subcategory}}</td>
           <td>{{ticket.description}}</td>
-          <td>{{ticket.status}}</td>
-          <td>{{ticket.score}}</td>
+          <td>
+            <span class="far fa-pause-circle" *ngIf="ticket.status === 'pendiente'" ></span>
+            <span class="far fa-comments" *ngIf="ticket.status === 'repondido'" ></span>
+            <span class="far fa-check-circle" *ngIf="ticket.status === 'calificado'" ></span>
+
+          </td>
+          <td>
+              <i name="star" *ngIf="ticket.score > 0" class="fa fa-star"></i>
+              <i name="star" *ngIf="ticket.score > 1" class="fa fa-star"></i>
+              <i name="star" *ngIf="ticket.score > 2" class="fa fa-star"></i>
+              <i name="star" *ngIf="ticket.score > 3" class="fa fa-star"></i>
+              <i name="star" *ngIf="ticket.score > 4" class="fa fa-star"></i>
+          </td>
         </tr>
       </tbody>
     </table>
   </div>
 </div>
 
-<div class="modal fade" id="ticketDetails" tabindex="-1" role="dialog" aria-labelledby="ticketDetailsLabel" aria-hidden="true">
+<div class="modal fade" id="ticketDetails" tabindex="-1" role="dialog" aria-labelledby="ticketDetailsLabel"
+  aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
-        <app-ticket-details [key]="key"></app-ticket-details>
+      <app-ticket-details [key]="key"></app-ticket-details>
     </div>
   </div>
 </div>

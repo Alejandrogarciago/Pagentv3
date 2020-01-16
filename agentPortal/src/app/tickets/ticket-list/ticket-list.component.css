@@ -28,3 +28,33 @@ a {
     cursor: pointer;
     color: #039be5;
 }
+
+.fa-star {
+  color: #FFED85;
+  margin-left: 5px;
+  margin-right: 5px;
+  font-size: 14px;
+}
+
+.fa-pause-circle {
+    font-size: 28px;
+    color: yellow;
+}
+
+.fa-comments {
+    font-size: 28px;
+    color: green;
+}
+
+.fa-check-circle {
+    font-size: 28px;
+    color: blue;
+}
+
+table.dataTable.no-footer {
+    border-bottom: 1px solid #f6f6f6;
+}
+
+table.dataTable thead th, table.dataTable thead td {
+    border-bottom: 1px solid #f6f6f6;
+}

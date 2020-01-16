@@ -10,19 +10,23 @@ import { AngularFireAuth } from '@angular/fire/auth';
   styleUrls: ['./ticket-list.component.css']
 })
 export class TicketListComponent implements OnInit {
+  dtOptions: DataTables.Settings = {};
   private itemDoc: AngularFirestoreCollection<Ticket>;
   item: Observable<any>;
   key: string;
   user: any;
 
-  constructor(private afs: AngularFirestore, private afAuth: AngularFireAuth ) {
+  constructor(private afs: AngularFirestore, private afAuth: AngularFireAuth) {
     this.user = afAuth.auth.currentUser;
     this.itemDoc = this.afs.collection<Ticket>('tickets', ref => ref.where('uid', '==', this.user.uid));
     this.item = this.itemDoc.valueChanges();
-   }
+  }
 
   ngOnInit() {
-
+    this.dtOptions = {
+      pagingType: 'full_numbers',
+      pageLength: 10
+    };
   }
   selectKey($event) {
     this.key = $event.target.innerHTML;

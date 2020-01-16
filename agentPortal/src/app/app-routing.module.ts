@@ -11,6 +11,7 @@ import { AngularFireAuthGuard, redirectUnauthorizedTo, customClaims } from '@ang
 import { map } from 'rxjs/operators';
 import { UsersComponent } from './users/users.component';
 import { pipe } from 'rxjs';
+import { FinanzeComponent } from './finanze/finanze.component';
 
 const redirectUnauthorizedToLogin = () => redirectUnauthorizedTo(['']);
 const redirectLoggedInToProfile = () =>
@@ -64,8 +65,6 @@ const routes: Routes = [
       { path: 'details', component: TicketDetailsComponent },
       { path: 'list', component: TicketListComponent },]
   },
-
-
   {
     path: 'profile/:id', component: ProfileComponent, canActivate: [AngularFireAuthGuard],
     data: { authGuardPipe: onlyAllowSelfOrAdmin }
@@ -73,7 +72,9 @@ const routes: Routes = [
   {
     path: 'users', component: UsersComponent, canActivate: [AngularFireAuthGuard],
     data: { authGuardPipe: adminOnly }
-  }
+  },
+  {
+    path: 'finanze', component: FinanzeComponent, canActivate: [AngularFireAuthGuard]  }
 ];
 
 @NgModule({

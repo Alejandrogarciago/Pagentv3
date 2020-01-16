@@ -20,11 +20,11 @@
                         </a>
                     </th>
                     <td>
-                        <a routerLink="['/profile, user.uid']">{{users.name}}</a>
+                        <a [routerLink]="[ '/profile', users.uid]">{{users.firstName}}</a>
                     </td>
                     <td>{{users.secondName}}</td>
                     <td>{{users.lastName}}</td>
-                    <td>{{users.seconLastName}}</td>
+                    <td>{{users.motherLastName}}</td>
                     <td>{{users.password}}</td>
                     <td>{{users.active}}</td>
                 </tr>

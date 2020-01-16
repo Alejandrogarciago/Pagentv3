@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
+import { AngularFirestore } from '@angular/fire/firestore';
 
 @Component({
   selector: 'app-login',
@@ -9,11 +10,11 @@ import { Router } from '@angular/router';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-
+  domain = '@sykes.com'
   loading = false;
   error: string;
-  domain = '@sykes.com'
-  constructor(private afAuth: AngularFireAuth, private router: Router) { }
+  action: 'login' | 'signup' = 'login';
+  constructor(private afAuth: AngularFireAuth, private router: Router, private afs: AngularFirestore) { }
 
   ngOnInit() {
   }
@@ -21,12 +22,23 @@ export class LoginComponent implements OnInit {
   async onSubmit(form: NgForm) {
     this.loading = true;
     this.error = null;
-    const { email, password} = form.value;
+    const { firstName, lastName, secondName, motherLastName, email, password } = form.value;
     let resp: any;
     try {
-      resp = await this.afAuth.auth.signInWithEmailAndPassword(email + this.domain, password);
+      if (this.isSignup) {
+        resp = await this.afAuth.auth.createUserWithEmailAndPassword(email + this.domain, password);
+        await resp.user.updateProfile({ displayName: `${firstName } ${lastName}` });
+        const uid= resp.user.uid
+        let userProfile: any = {
+          firstName, lastName, secondName, motherLastName, email, password, uid
+        }
+        this.afs.doc(`users/${uid}`).set(userProfile);
+        form.reset();
+      } else {
+        resp = await this.afAuth.auth.signInWithEmailAndPassword(email + this.domain, password);
+      }
       const uid = resp.user.uid;
-      this.routeLogin();
+      this.router.navigate([`/profile/${uid}`]);
     }
     catch (error) {
       console.log(error.message);
@@ -34,14 +46,11 @@ export class LoginComponent implements OnInit {
     };
   };
 
-  async routeLogin() {
-    const user = this.afAuth.auth.currentUser;
-    const token = user.getIdTokenResult();
+  get isLogin() {
+    return this.action === 'login'
+  }
 
-    if( (await token).claims.admin) {
-      this.router.navigate(['/users'])
-    } else {
-      this.router.navigate([`/profile/${user.uid}`]);
-    }
+  get isSignup() {
+    return this.action === 'signup'
   }
 };

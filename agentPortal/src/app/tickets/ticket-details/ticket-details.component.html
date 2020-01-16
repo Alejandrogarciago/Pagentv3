@@ -12,38 +12,61 @@
             </div>
             <div class="col-md-8">
                 <p>Nombre: {{tickets.user}}</p>
+                <p>Calificacion:</p>
+                <div *ngIf="!tickets.score  && tickets.answer">
+                    <fieldset class="rating">
+                        <ng-container *ngFor="let num of [5,4,3,2,1]">
+                            <input type="radio" (click)="starHandler($event)" [id]="'star'+num" [value]="num"
+                                name="rating">
+                            <label [for]="'star'+num" class="full"></label>
+                        </ng-container>
+                    </fieldset>
+                </div>
+                <div *ngIf="tickets.score && tickets.answer">
+                    <i name="star" *ngIf="tickets.score > 0" class="fa fa-star"></i>
+                    <i name="star" *ngIf="tickets.score > 1" class="fa fa-star"></i>
+                    <i name="star" *ngIf="tickets.score > 2" class="fa fa-star"></i>
+                    <i name="star" *ngIf="tickets.score > 3" class="fa fa-star"></i>
+                    <i name="star" *ngIf="tickets.score > 4" class="fa fa-star"></i>
+                </div>
             </div>
-           
+
         </div>
         <hr>
-        <form>
-            <div class="form-row">
-                <div class="form-group col-md-12">
-                    <label for="department">Departamento</label>
-                    <input type="text" class="form-control" id="department" [value]="tickets.department" readonly>
-                </div>
-                <div class="form-group col-md-12">
-                    <label for="category">Categoria</label>
-                    <input type="text" class="form-control" id="category" [value]="tickets.category" readonly>
-                </div>
-                <div class="form-group col-md-12">
-                    <label for="subcategory">Sub categoria</label>
-                    <input type="text" class="form-control" id="subcategory" [value]="tickets.subcategory" readonly>
-                </div>
-                <div class="form-group col-md-12">
-                    <label for="description">Descripcion</label>
-                    <input type="text" class="form-control" id="description" [value]="tickets.description" readonly>
-                </div>
+
+        <div class="form-row">
+
+            <div class="form-group col-md-12">
+                <label for="department">Departamento</label>
+                <input type="text" class="form-control" id="department" [value]="tickets.department" readonly>
             </div>
+            <div class="form-group col-md-12">
+                <label for="category">Categoria</label>
+                <input type="text" class="form-control" id="category" [value]="tickets.category" readonly>
+            </div>
+            <div class="form-group col-md-12">
+                <label for="subcategory">Sub categoria</label>
+                <input type="text" class="form-control" id="subcategory" [value]="tickets.subcategory" readonly>
+            </div>
+            <div class="form-group col-md-12">
+                <label for="description">Descripcion</label>
+                <input type="text" class="form-control" id="description" [value]="tickets.description" readonly>
+            </div>
+            <div class="form-group col-md-12" *ngIf="tickets.answer">
+                <label for="description">Respuesta</label>
+                <textarea type="text" class="form-control" id="description" rows="3" [value]="tickets.answer" readonly></textarea>
+            </div>
+        </div>
+        <form #answerForm="ngForm" (submit)="onSubmit(answerForm)" [class.loading]="loading" *ngIf="!tickets.answer">
             <div class="form-row">
                 <div class="form-group col-md-12">
                     <label for="response">Respuesta</label>
-                    <textarea class="form-control" id="response" rows="3"></textarea>
+                    <textarea class="form-control" id="response" rows="3" name="answer" ngModel></textarea>
                 </div>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary" >Save changes</button>
+                <button type="submit" class="btn btn-primary">Save changes</button>
             </div>
         </form>
     </div>

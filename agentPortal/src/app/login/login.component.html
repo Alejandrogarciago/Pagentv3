@@ -12,10 +12,23 @@
         </div>
         <!-- Login Form -->
         <form #form="ngForm" (submit)="onSubmit(form)" [class.loading]="loading">
-            <input type="text" id="login" class="fadeIn second" name="email" placeholder="NT Login" ngModel>
+            <input type="text" id="name" class="fadeIn second" name="firstName" placeholder="Nombre" ngModel *ngIf="isSignup">
+            <input type="text" id="secondName" class="fadeIn second" name="secondName" placeholder="Segundo Nombre" ngModel *ngIf="isSignup">
+            <input type="text" id="lastName" class="fadeIn second" name="lastName" placeholder="Apellido Paterno" ngModel *ngIf="isSignup">
+            <input type="text" id="secondLastName" class="fadeIn second" name="motherLastName" placeholder="Apellido Materno" ngModel *ngIf="isSignup">
+            <input type="text" id="login" class="fadeIn second" name="email" placeholder="Correo Eléctronico" ngModel>
             <input type="password" id="password" class="fadeIn third" name="password" placeholder="password" ngModel>
-         
-            <input type="submit" class="fadeIn fourth">
+            <button type="submit" class="fadeIn fourth ">{{ action | uppercase }}</button>
+         <div class="actions">
+            <span *ngIf="isLogin">
+                or
+                <a (click)=" action = 'signup'">Registrarse</a>
+            </span>
+            <span *ngIf="isSignup">
+                or
+                <a (click)=" action = 'login'">Ingresar</a>
+            </span>
+         </div>
         </form>
 
         <!-- Remind Passowrd -->

@@ -1,4 +1,4 @@
-<div class="container-fluid pt-4" *ngIf="item | async as userProfile">
+<div class="container-fluid pt-4" *ngIf="profile | async as userProfile">
 
     <div class="row mb-4">
         <div class="col-md-4">
@@ -215,9 +215,5 @@
                 </div>
             </div>
         </div>
-    </div>
-
-    <div class="row">
-        <app-paystub class="col"></app-paystub>
     </div>
 </div>
