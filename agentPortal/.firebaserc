@@ -1,0 +1,14 @@
+{
+  "projects": {
+    "default": "sykes-mexico-portal"
+  },
+  "targets": {
+    "sykes-mexico-portal": {
+      "hosting": {
+        "agentPortal": [
+          "sykes-portal"
+        ]
+      }
+    }
+  }
+}

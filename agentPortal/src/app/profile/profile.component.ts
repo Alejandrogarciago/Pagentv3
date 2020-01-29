@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFirestoreDocument, AngularFirestore } from '@angular/fire/firestore';
-import { observable, Observable } from 'rxjs';
+import { Observable } from 'rxjs';
 import { UserProfile } from '../profile/user-profile.model';
 import { ActivatedRoute } from '@angular/router';
 import { NgForm } from '@angular/forms';
@@ -29,7 +29,6 @@ export class ProfileComponent implements OnInit {
     private afStorage: AngularFireStorage,
     private afAuth: AngularFireAuth) {
     this.uid = this.route.snapshot.paramMap.get('id');
-    this.downloadURL = this.afStorage.ref(`users/${this.uid}/profile-image`).getDownloadURL();
   }
 
   ngOnInit() {
@@ -106,4 +105,15 @@ export class ProfileComponent implements OnInit {
       value => this.afAuth.auth.currentUser.updateProfile({ photoURL: value })
     );
   }
+
+  
+  updateUrl($event) {
+  const imagePath = $event.target.innerHTML;
+    this.afAuth.auth.currentUser.updateProfile({photoURL: imagePath});
+    this.afs.doc(`users/${this.uid}`).update({imageUpdate: false});
+  }
+
+  incorrectImage() {
+      this.afs.doc(`users/${this.uid}`).update({imageUpdate: false});
+    }
 }

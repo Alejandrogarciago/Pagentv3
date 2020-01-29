@@ -23,7 +23,7 @@
                 <div class="dropdown-menu dropdown-toggle-split" aria-labelledby="dropdownMenuLink">
                     <a class="dropdown-item" routerLink="profile/:id">
                         <i class="iconoprofile fas fa-user"></i>
-                        View Profile
+                        Ver Perfil
                     </a>
 
                     <a class="dropdown-item" (click)="logout()"> <i class="iconologout fas fa-sign-out-alt"></i> Logout
@@ -35,26 +35,26 @@
         <ul class="list-unstyled components">
             <li>
                 <a routerLink="/tickets">
-                    <i class="iconoticket fa fa-clipboard"></i>
+                    <i class="fa fa-clipboard"></i>
                     Tickets
                 </a>
             </li>
             <li>
                 <a [routerLink]="['/profile',userProfile.uid]">
-                    <i class="iconoprofile fas fa-user"></i>
-                    Profile
-                </a>
-            </li>
-            <li>
-                <a routerLink="/users">
-                    <i class="iconoticket fa fa-users"></i>
-                    Users
+                    <i class="fas fa-user"></i>
+                    Perfilf
                 </a>
             </li>
             <li>
                 <a routerLink="/finanze">
-                    <i class="iconoticket fa fa-users"></i>
-                    nomina
+                    <i class="fas fa-file-invoice-dollar"></i>
+                    Nomina
+                </a>
+            </li>
+            <li>
+                <a routerLink="/communications">
+                    <i class="fas fa-comment"></i>
+                    Communicaciones
                 </a>
             </li>
         </ul>
@@ -75,8 +75,8 @@
                         {{userProfile.displayName}}
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                        <a class="dropdown-item" routerLink="profile/:id"><i class="iconoprofile fas fa-user"></i>View
-                            Profile</a>
+                        <a class="dropdown-item" routerLink="profile/:id"><i class="iconoprofile fas fa-user"></i>Ver
+                            Perfil</a>
                         <a class="dropdown-item" (click)="logout()"><i
                                 class="iconologout fas fa-sign-out-alt"></i>Logout</a>
                     </div>

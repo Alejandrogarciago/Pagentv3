@@ -9,3 +9,8 @@
     margin: -100px auto 12px;
     background-color: #fff;
 }
+
+.height-300 {
+    min-height: 300px;
+}
+

@@ -1,0 +1,53 @@
+<div class="row">
+  <div class="col-md-12 border-div">
+    <table datatable [dtOptions]="dtOptions" class="row-border hover shadow-sm"
+      *ngIf="communication | async as communication">
+      <thead>
+        <tr class="table-header shadow-sm">
+          <th scope="col"></th>
+          <th scope="col">ID</th>
+          <th scope="col">Publicado Por</th>
+          <th scope="col">Titulo</th>
+          <th scope="col">Vistas</th>
+          <th scope="col">Likes</th>
+          <th scope="col">Dislikes</th>
+
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let communication of communication">
+          <th scope="row">
+            <img class="mx-auto rounded-circle user-photo" [src]="communication.uploadedByPhotoURL" alt="">
+          </th>
+          <td>
+            <a (click)="selectKey($event)" data-toggle="modal"
+              data-target="#communicationDetails">{{communication.key}}</a>
+          </td>
+          <td>{{communication.uploadedBy}}</td>
+          <td>{{communication.title}}</td>
+          <td >
+            <i class="fas fa-eye"></i>
+            <span class="badge badge-primary" id="{{communication.key}}">{{communication.viewsCount}}</span>
+          </td>
+          <td>
+            <i class="fas fa-thumbs-up"></i>
+            <span class="badge badge-success">{{communication.likesCount}}</span>
+          </td>
+          <td>
+            <i class="fas fa-thumbs-down"></i>
+            <span class="badge badge-danger">{{communication.dislikesCount}}</span>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<div class="modal fade" id="communicationDetails" tabindex="-1" role="dialog"
+  aria-labelledby="communicationDetailsLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <app-communication-detail [key]="key"></app-communication-detail>
+    </div>
+  </div>
+</div>

@@ -27,7 +27,7 @@
           <td>{{ticket.category}}</td>
           <td>{{ticket.subcategory}}</td>
           <td>{{ticket.description}}</td>
-          <td>
+          <td class="text-center">
             <span class="far fa-pause-circle" *ngIf="ticket.status === 'pendiente'" ></span>
             <span class="far fa-comments" *ngIf="ticket.status === 'repondido'" ></span>
             <span class="far fa-check-circle" *ngIf="ticket.status === 'calificado'" ></span>

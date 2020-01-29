@@ -1,29 +1,33 @@
 <div *ngIf="paystub | async as paystub ">
-    <h4 class="mb-2">Mis recibos de Nomina</h4>
-    <!-- <p>{{ paystub | json }}</p> -->
-    <table class="table table-hover table-borderless shadow bg-white table-striped table-sm ">
+    <table datatable class="row-border hover shadow-sm">
         <thead>
             <tr class="table-header shadow-sm">
-                <th scope="col">Periodo de Pago</th>
-                <th scope="col">Pago Bruto</th>
-                <th scope="col">Descuento</th>
-                <th scope="col">Pago Neto</th>
-                <th scope="col">Subcategoria</th>
-                <th scope="col">Descargar PDF</th>
-           
+                <th scope="col">Emisor RFC</th>
+                <th scope="col">Emisor</th>
+                <th scope="col">Descripcion</th>
+                <th scope="col">Importe</th>
+                <th scope="col">Decuento</th>
+                <th scope="col">Fecha de Timbre</th>
+                <th scope="col">Recibo PDF</th>
             </tr>
         </thead>
-        <tbody *ngIf="item | async as ticket">
-            <tr *ngFor="let ticket of ticket">
-                <th scope="row">
-                    <a>
-                        <img class="mx-auto rounded-circle user-photo" [src]="ticket.userPhotoURL" alt="">
+        <tbody>
+            <tr *ngFor="let paystub of paystub">
+                <td>{{paystub.EmisorRfc}}</td>
+                <td>{{paystub.EmisorNombre}}</td>
+                <td>{{paystub.Descripcion}}</td>
+                <td class="percepciones text-center">${{paystub.Importe}}</td>
+                <td class="deducciones text-center">${{paystub.Descuento}}</td>
+                <td class="text-center">{{paystub.FechaTimbre | date:'MM/dd/yyyy'}}</td>
+                <td class="text-center">
+                    <a (click)="getPdfPaystub($event)" #pdfLink hidden >{{paystub.UUID}}</a>
+                    <i class="fas fa-cloud-download-alt" (click)="pdfLink.click()" *ngIf="!paystubPdf"></i>
+                    <a *ngIf="paystubPdf | async as paystubPdf" [href]="paystubPdf">
+                        <i class="far fa-file-pdf"></i>
                     </a>
-                </th>
-                <td></td>
-                <td></td>
-                <td></td>
+                </td>
             </tr>
         </tbody>
     </table>
+
 </div>

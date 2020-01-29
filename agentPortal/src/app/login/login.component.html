@@ -11,7 +11,7 @@
             {{ error }}
         </div>
         <!-- Login Form -->
-        <form #form="ngForm" (submit)="onSubmit(form)" [class.loading]="loading">
+        <form   >
             <input type="text" id="name" class="fadeIn second" name="firstName" placeholder="Nombre" ngModel *ngIf="isSignup">
             <input type="text" id="secondName" class="fadeIn second" name="secondName" placeholder="Segundo Nombre" ngModel *ngIf="isSignup">
             <input type="text" id="lastName" class="fadeIn second" name="lastName" placeholder="Apellido Paterno" ngModel *ngIf="isSignup">

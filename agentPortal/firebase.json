@@ -1,0 +1,17 @@
+{
+  "hosting": {
+    "target": "agentPortal",
+    "public": "dist/agentPortal",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ],
+    "rewrites": [
+      {
+        "source": "**",
+        "destination": "/index.html"
+      }
+    ]
+  }
+}

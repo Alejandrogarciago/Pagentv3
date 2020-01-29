@@ -26,6 +26,10 @@ import { UserListComponent } from './users/user-list/user-list.component';
 import { UserDetailsComponent } from './users/user-details/user-details.component';
 import { FinanzeComponent } from './finanze/finanze.component';
 import { LoginComponent } from './login/login.component';
+import { CommunicationsComponent } from './communications/communications.component';
+import { CreateCommunicationComponent } from './communications/create-communication/create-communication.component';
+import { CommunicationDetailComponent } from './communications/communication-detail/communication-detail.component';
+import { CommunicationListComponent } from './communications/communication-list/communication-list.component';
 
 
 
@@ -44,7 +48,11 @@ import { LoginComponent } from './login/login.component';
     CreateUserComponent,
     UserListComponent,
     UserDetailsComponent,
-    FinanzeComponent
+    FinanzeComponent,
+    CommunicationsComponent,
+    CreateCommunicationComponent,
+    CommunicationDetailComponent,
+    CommunicationListComponent
     
     
   ],

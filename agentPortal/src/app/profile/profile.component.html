@@ -1,35 +1,33 @@
-<div class="container-fluid pt-4" *ngIf="profile | async as userProfile">
+<div class="container-fluid pt-4" *ngIf="profile | async as profile">
 
     <div class="row mb-4">
         <div class="col-md-4">
-            <div class="card shadow-lg">
+            <div class="card shadow-lg height-300 mb-4">
                 <img src="https://www.setaswall.com/wp-content/uploads/2017/04/Material-Wallpaper-30-1600x900.jpg"
                     class="card-img-top" alt="">
                 <div class="card-body text-center">
-                    <div *ngIf="downloadURL | async; let srcURL">
-                        <img [src]="srcURL" alt="" class="rounded-circle profile-image" #photoURL>
-                    </div>
-                    <div class="alert alert-danger" role="alert" *ngIf="error">
-                        {{error}}
-                    </div>
-
-                    <div class="row">
-
-                        <div class="col-md-2"></div>
-
-                        <div class="custom-file">
-
-                            <input type="file" #fileInput (change)="fileChange($event)" class="custom-file-input"
-                                id="customFile" accept=".png,.jpg">
-                            <label class="custom-file-label" for="customFile">Choose Profile
-                                Image</label>
-                        </div>
+                    <div>
+                        <img [src]="profile.imagePath" alt="" class="rounded-circle profile-image" id="photoURL"  >
+                        <h3 class="text-center text-secondary">{{profile.firstName}} {{profile.lastName}}
+                            {{profile.motherLastName}}</h3>
                     </div>
                 </div>
             </div>
+            <div class="alert alert-warning" role="alert" *ngIf="profile.imageUpdate">
+                <p>Hubo un cambio en tu imagen de perfil. ¿Esta imagen es tuya?</p>
+                <hr>
+                <div>
+                    <a #photoURL hidden (click)="updateUrl($event)">{{profile.imagePath}}</a>
+                    <button class="btn btn-success mr-3"  (click)="photoURL.click()">Si, soy yo</button>
+                    <button class="btn btn-danger " (click)="incorrectImage()">No, soy yo</button>
+
+                </div>
+            </div>
+
+
         </div>
         <div class="col-md-8">
-            <div class="card gedf-card shadow-lg">
+            <div class="card gedf-card shadow-lg height-300">
                 <div class="card-header">
                     <ul class="nav nav-tabs card-header-tabs" id="myTab" role="tablist">
                         <li class="nav-item">
@@ -62,51 +60,48 @@
                                 <div class="form-row">
                                     <div class="form-group col-md-4">
                                         <label for="firstName">Nombre</label>
-                                        <input type="text" class="form-control" id="firstName"
-                                            value="{{userProfile.name}}" name="firstName"
-                                            [ngModel]="userProfile.firstName">
+                                        <input type="text" class="form-control" id="firstName" value="{{profile.name}}"
+                                            name="firstName" [ngModel]="profile.firstName">
                                     </div>
                                     <div class="form-group col-md-4">
                                         <label for="lastName">Apellido
                                             Paterno</label>
                                         <input type="text" class="form-control" id="lastName"
-                                            value="{{userProfile.lastName}}" name="lastName"
-                                            [ngModel]="userProfile.lastName">
+                                            value="{{profile.lastName}}" name="lastName" [ngModel]="profile.lastName">
                                     </div>
                                     <div class="form-group col-md-4">
                                         <label for="motherLastName">Apellido
                                             Materno</label>
                                         <input type="text" class="form-control" id="motherLastName"
-                                            value="{{userProfile.motherLastName}}" name="motherLastName"
-                                            [ngModel]="userProfile.motherLastName">
+                                            value="{{profile.motherLastName}}" name="motherLastName"
+                                            [ngModel]="profile.motherLastName">
                                     </div>
                                 </div>
                                 <div class="form-row">
                                     <div class="form-group col-md-6">
                                         <label for="email">Correo
                                             Electronico</label>
-                                        <input type="email" class="form-control" id="email"
-                                            value="{{userProfile.email}}" name="email" [ngModel]="userProfile.email">
+                                        <input type="email" class="form-control" id="email" value="{{profile.email}}"
+                                            name="email" [ngModel]="profile.email">
                                     </div>
                                     <div class="form-group col-md-3">
                                         <label for="birthday">Fecha de
                                             Nacimiento
                                         </label>
                                         <input type="date" class="form-control" id="birthday"
-                                            value="{{userProfile.birthday}}" name="birthday"
-                                            [ngModel]="userProfile.birthday">
+                                            value="{{profile.birthday}}" name="birthday" [ngModel]="profile.birthday">
                                     </div>
                                     <div class="form-group col-md-3">
                                         <label for="gender">Sexo
                                         </label>
-                                        <input type="text" class="form-control" id="gender"
-                                            value="{{userProfile.gender}}" name="gender" [ngModel]="userProfile.gender">
+                                        <input type="text" class="form-control" id="gender" value="{{profile.gender}}"
+                                            name="gender" [ngModel]="profile.gender">
                                     </div>
                                 </div>
                                 <div class="form-row">
                                     <div class="form-group col-md-6">
                                         <label for="role">Role</label>
-                                        <select name="role" id="role" [ngModel]="userProfile.role" class="form-control">
+                                        <select name="role" id="role" [ngModel]="profile.role" class="form-control">
                                             <option value="agent">agent
                                             </option>
                                             <option value="Staff">Staff
@@ -124,21 +119,19 @@
                                 <div class="form-row">
                                     <div class="form-group col-md-4">
                                         <label for="avayaId">Avaya ID</label>
-                                        <input type="text" class="form-control" id="avayaId"
-                                            value="{{userProfile.avayaId}}" name="avayaId"
-                                            [ngModel]="userProfile.avayaId">
+                                        <input type="text" class="form-control" id="avayaId" value="{{profile.avayaId}}"
+                                            name="avayaId" [ngModel]="profile.avayaId">
                                     </div>
                                     <div class="form-group col-md-4">
                                         <label for="unifyId">Unify ID</label>
-                                        <input type="text" class="form-control" id="unifyId"
-                                            value="{{userProfile.unifyId}}" name="unifyId"
-                                            [ngModel]="userProfile.unifyId">
+                                        <input type="text" class="form-control" id="unifyId" value="{{profile.unifyId}}"
+                                            name="unifyId" [ngModel]="profile.unifyId">
                                     </div>
                                     <div class="form-group col-md-4">
                                         <label for="five9User">Five9 User</label>
                                         <input type="text" class="form-control" id="five9User"
-                                            value="{{userProfile.five9User}}" name="five9User"
-                                            [ngModel]="userProfile.five9User">
+                                            value="{{profile.five9User}}" name="five9User"
+                                            [ngModel]="profile.five9User">
                                     </div>
                                 </div>
                                 <button type="submit" class="btn btn-primary">Submit</button>
@@ -151,20 +144,19 @@
                                     <div class="form-group col-md-4">
                                         <label for="costCenter">Centro de Costo</label>
                                         <input type="text" class="form-control" id="costCenter"
-                                            value="{{userProfile.costCenter}}" name="costCenter"
-                                            [ngModel]="userProfile.costCenter">
+                                            value="{{profile.costCenter}}" name="costCenter"
+                                            [ngModel]="profile.costCenter">
                                     </div>
                                     <div class="form-group col-md-4">
                                         <label for="costCenterDescription">Descripcion de Centro de Costos</label>
                                         <input type="text" class="form-control" id="costCenterDescription"
-                                            value="{{userProfile.costCenterDescription}}" name="costCenterDescription"
-                                            [ngModel]="userProfile.costCenterDescription">
+                                            value="{{profile.costCenterDescription}}" name="costCenterDescription"
+                                            [ngModel]="profile.costCenterDescription">
                                     </div>
                                     <div class="form-group col-md-4">
                                         <label for="kronosId">Kronos ID</label>
                                         <input type="text" class="form-control" id="kronosId"
-                                            value="{{userProfile.kronosId}}" name="kronosId"
-                                            [ngModel]="userProfile.kronosId">
+                                            value="{{profile.kronosId}}" name="kronosId" [ngModel]="profile.kronosId">
                                     </div>
                                 </div>
                                 <button type="submit" class="btn btn-primary">Submit</button>
@@ -177,8 +169,8 @@
                                     <div class="form-group col-md-4">
                                         <label for="badgeNumber">Badge Number</label>
                                         <input type="text" class="form-control" id="badgeNumber"
-                                            value="{{userProfile.badgeNumber}}" name="badgeNumber"
-                                            [ngModel]="userProfile.badgeNumber">
+                                            value="{{profile.badgeNumber}}" name="badgeNumber"
+                                            [ngModel]="profile.badgeNumber">
                                     </div>
                                 </div>
                                 <button type="submit" class="btn btn-primary">Submit</button>
@@ -186,25 +178,24 @@
                             <div class="py-4"></div>
                         </div>
                         <div class="tab-pane fade" id="recruitment" role="tabpanel" aria-labelledby="recruitment-tab">
-                            <form #recruitmentForm="ngForm" (submit)="onSubmit(recruitmentForm)" [class.loading]="loading">
+                            <form #recruitmentForm="ngForm" (submit)="onSubmit(recruitmentForm)"
+                                [class.loading]="loading">
                                 <div class="form-row">
                                     <div class="form-group col-md-4">
                                         <label for="agency">Agencia</label>
-                                        <input type="text" class="form-control" id="agency"
-                                            value="{{userProfile.agency}}" name="agency"
-                                            [ngModel]="userProfile.agency">
+                                        <input type="text" class="form-control" id="agency" value="{{profile.agency}}"
+                                            name="agency" [ngModel]="profile.agency">
                                     </div>
                                     <div class="form-group col-md-4">
                                         <label for="experienceCallCenter">Experiencia en Call Center</label>
                                         <input type="text" class="form-control" id="experienceCallCenter"
-                                            value="{{userProfile.experienceCallCenter}}" name="experienceCallCenter"
-                                            [ngModel]="userProfile.experienceCallCenter">
+                                            value="{{profile.experienceCallCenter}}" name="experienceCallCenter"
+                                            [ngModel]="profile.experienceCallCenter">
                                     </div>
                                     <div class="form-group col-md-4">
                                         <label for="Language">Lenguaje</label>
                                         <input type="text" class="form-control" id="Language"
-                                            value="{{userProfile.Language}}" name="Language"
-                                            [ngModel]="userProfile.Language">
+                                            value="{{profile.Language}}" name="Language" [ngModel]="profile.Language">
                                     </div>
                                 </div>
                                 <button type="submit" class="btn btn-primary">Submit</button>

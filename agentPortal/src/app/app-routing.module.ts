@@ -12,6 +12,7 @@ import { map } from 'rxjs/operators';
 import { UsersComponent } from './users/users.component';
 import { pipe } from 'rxjs';
 import { FinanzeComponent } from './finanze/finanze.component';
+import { CommunicationsComponent } from './communications/communications.component';
 
 const redirectUnauthorizedToLogin = () => redirectUnauthorizedTo(['']);
 const redirectLoggedInToProfile = () =>
@@ -74,7 +75,11 @@ const routes: Routes = [
     data: { authGuardPipe: adminOnly }
   },
   {
-    path: 'finanze', component: FinanzeComponent, canActivate: [AngularFireAuthGuard]  }
+    path: 'finanze', component: FinanzeComponent, canActivate: [AngularFireAuthGuard]
+  },
+  {
+    path: 'communications', component: CommunicationsComponent, canActivate: [AngularFireAuthGuard]
+  }
 ];
 
 @NgModule({

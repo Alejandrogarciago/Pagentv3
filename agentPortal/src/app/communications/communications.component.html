@@ -1,0 +1,22 @@
+<div class="row pt-4">
+    <div class="col-9">
+        <!-- New communication trigger modal -->
+        <a class="btn btn-primary text-white" data-toggle="modal" data-target="#newCommunicationModal">
+            <i class="fas fa-plus"></i>
+            <span> Nueva Publicacion</span>
+        </a>
+    </div>
+</div>
+<div class="pt-4">
+    <app-communication-list></app-communication-list>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="newCommunicationModal" tabindex="-1" role="dialog" aria-labelledby="newCommunicationModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <app-create-communication></app-create-communication>
+        </div>
+    </div>
+</div>  
