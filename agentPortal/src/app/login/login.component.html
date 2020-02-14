@@ -1,17 +1,21 @@
+
+
+<div class="bg">
 <div class="wrapper fadeInDown">
     <div id="formContent">
         <!-- Tabs Titles -->
-
-        <!-- Icon -->
-        <div class="fadeIn first">
-            <img src="assets/img/SYKES Mexico_logo.png" id="icon" alt="logo" />
-        </div>
         <!-- Error message -->
         <div class="alert alert-danger" role="alert" *ngIf="error">
             {{ error }}
         </div>
         <!-- Login Form -->
-        <form   >
+        <form #form="ngForm" (submit)="onSubmit(form)" [class.loading]="loading"  >
+        <!-- Icon -->
+            <div class="fadeIn first" style=”padding:12px;background-color:#0998dc;line-height:1.1;”>
+                <img src="assets/img/Sykes_logo.png" id="icon" alt="logo" />
+            </div>
+
+
             <input type="text" id="name" class="fadeIn second" name="firstName" placeholder="Nombre" ngModel *ngIf="isSignup">
             <input type="text" id="secondName" class="fadeIn second" name="secondName" placeholder="Segundo Nombre" ngModel *ngIf="isSignup">
             <input type="text" id="lastName" class="fadeIn second" name="lastName" placeholder="Apellido Paterno" ngModel *ngIf="isSignup">
@@ -36,5 +40,6 @@
             <a class="underlineHover">Forgot Password?</a>
         </div>
     </div>
+</div>
 </div>
 

@@ -9,14 +9,14 @@
             <div class="top-bar">
             </div>
 
-            <div class="sidebar-image">
+            <div class="sidebar-image" align="center" >
                 <img [src]="userProfile.photoURL" alt="" *ngIf="userProfile.photoURL">
-                <img [src]="" alt="" *ngIf="!userProfile.photoURL">
+                <img [src]="" alt="" *ngIf="!userProfile.photoURL" >
 
             </div>
             <div class="dropdown">
                 <a class="dropdown-toggle userName" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true"
-                    aria-expanded="false">
+                    aria-expanded="false" >
                     {{ userProfile.displayName}}
                 </a>
 
@@ -34,15 +34,15 @@
         </div>
         <ul class="list-unstyled components">
             <li>
-                <a routerLink="/tickets">
-                    <i class="fa fa-clipboard"></i>
-                    Tickets
+                <a [routerLink]="['/profile',userProfile.uid]">
+                    <i class="fas fa-user"></i>
+                    Perfil
                 </a>
             </li>
             <li>
-                <a [routerLink]="['/profile',userProfile.uid]">
-                    <i class="fas fa-user"></i>
-                    Perfilf
+                <a routerLink="/tickets">
+                    <i class="fa fa-clipboard"></i>
+                    Tickets
                 </a>
             </li>
             <li>
@@ -62,19 +62,20 @@
     </nav>
 
 
+    
     <div class="" id="content">
-        <nav class="sticky-top navbar navbar-expand navbar-light bg-white topbar shadow"
-            *ngIf="afAuth.user | async as userProfile">
+        <nav id="topbar" class="sticky-top navbar navbar-expand navbar-light bg-white topbar shadow"  style="background-color: #059ae2!important;"
+            *ngIf="afAuth.user | async as userProfile" >
             <a type="button" id="sidebarCollapse" class="btn" (click)="sidebarToggle()">
                 <i class="fa fa-bars"></i>
             </a>
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown"
-                        aria-haspopup="true" aria-expanded="false">
-                        {{userProfile.displayName}}
+                        aria-haspopup="true" aria-expanded="false" style="color: #ececec!important;">
+                        {{userProfile.displayName}} 
                     </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink" >
                         <a class="dropdown-item" routerLink="profile/:id"><i class="iconoprofile fas fa-user"></i>Ver
                             Perfil</a>
                         <a class="dropdown-item" (click)="logout()"><i

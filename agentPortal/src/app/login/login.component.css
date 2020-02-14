@@ -289,6 +289,18 @@ input[type=password]:placeholder {
 }
 
 #icon {
-    height: 100px;
+    height: 60px;
     margin: 15px;
 }
+/* BACKGROUND */
+
+.bg {
+    /* The image used */
+    background-image: url("/assets/img/login_bg.jpg");
+    /* Full height */
+    height: 100%; 
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+   
+  }

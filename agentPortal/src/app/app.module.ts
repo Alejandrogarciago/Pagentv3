@@ -12,6 +12,7 @@ import { AngularFireAuthGuard } from '@angular/fire/auth-guard';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { AngularFireStorageModule } from '@angular/fire/storage';
 import {  AngularFireDatabase } from '@angular/fire/database';
+import { AngularFontAwesomeModule } from 'angular-font-awesome';
 
 import { DataTablesModule } from 'angular-datatables';
 import { ProfileComponent } from './profile/profile.component';
@@ -30,6 +31,7 @@ import { CommunicationsComponent } from './communications/communications.compone
 import { CreateCommunicationComponent } from './communications/create-communication/create-communication.component';
 import { CommunicationDetailComponent } from './communications/communication-detail/communication-detail.component';
 import { CommunicationListComponent } from './communications/communication-list/communication-list.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 
 
@@ -52,7 +54,8 @@ import { CommunicationListComponent } from './communications/communication-list/
     CommunicationsComponent,
     CreateCommunicationComponent,
     CommunicationDetailComponent,
-    CommunicationListComponent
+    CommunicationListComponent,
+    
     
     
   ],
@@ -66,7 +69,9 @@ import { CommunicationListComponent } from './communications/communication-list/
     AngularFirestoreModule,
     AngularFireStorageModule,
     HttpClientModule,
-    DataTablesModule
+    DataTablesModule,
+    BrowserAnimationsModule,
+    AngularFontAwesomeModule
 
   ],
   providers: [AngularFireAuthGuard, AngularFireDatabase],
