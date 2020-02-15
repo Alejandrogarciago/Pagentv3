@@ -1,7 +1,52 @@
+@media (min-width: 992px) {
+  .gedf-main {
+      padding-left: 4rem;
+      padding-right: 4rem;
+  }
+  .gedf-card {
+      margin-bottom: 2.77rem;
+  }
+}
+
+
 #newpublication {
 
-    max-width: 60%;
-    
-    border: rgb(131, 127, 127) 2px solid;
-  margin: 1px;
+  max-width: 60%;
+  max-height: 30%;
 }
+
+#top {
+align: center;
+
+}
+
+.create {
+
+  padding-top: 0;
+  /*IMPORTANTE*/
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  
+}
+
+.comunication {
+
+  padding-top: 0;
+  /*IMPORTANTE*/
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+}
+
+.comunicationlist {
+
+  padding-top: 0;
+  /*IMPORTANTE*/
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+}
+

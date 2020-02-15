@@ -64,7 +64,7 @@
 
     
     <div class="" id="content">
-        <nav id="topbar" class="sticky-top navbar navbar-expand navbar-light bg-white topbar shadow"  style="background-color: #059ae2!important;"
+        <nav id="topbar" class="sticky-top navbar navbar-expand navbar-light bg-white topbar shadow"  style="background-color: #f5f5f5!important;"
             *ngIf="afAuth.user | async as userProfile" >
             <a type="button" id="sidebarCollapse" class="btn" (click)="sidebarToggle()">
                 <i class="fa fa-bars"></i>
@@ -72,7 +72,7 @@
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown"
-                        aria-haspopup="true" aria-expanded="false" style="color: #ececec!important;">
+                        aria-haspopup="true" aria-expanded="false" style="color: #000000!important;">
                         {{userProfile.displayName}} 
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink" >

@@ -1,27 +1,19 @@
-<div class="modal-header">
+<!--TITLE -->
+   <div class="modal-header" id="header">
     <h5 class="modal-title" id="newUserModalLabel">Nueva Publicacion</h5>
-    <button type="button" class="close" data-dismiss="modal" aria-label="Close" #closeCreateCommunicationModal
-        (click)="modalClose()">
-        <span aria-hidden="true">&times;</span>
-    </button>
-</div>
-<div class="modal-body">
-    <form class="form-horizontal" #newCommunication="ngForm" (submit)="onSubmit(newCommunication)">
-        <div class="alert alert-danger" role="alert" *ngIf="error">
-            <a type="button" class="close" data-dismiss="modal" aria-label="Close" #closeCreateCommunicationModal
-                (click)="modalClose()">
-                <span aria-hidden="true">&times;</span>
-            </a>
+    <i class="fas fa-plus"></i>
+   </div>
+
+   <div class="modal-body"  >
+    <form class="form-horizontal" #newCommunication="ngForm" (submit)="onSubmit(newCommunication)" id="formContent">
+        <div class="alert alert-danger" role="alert" *ngIf="error">     
             {{ error }}
         </div>
-        <div class="alert alert-success" role="alert" *ngIf="result">
-            <a type="button" class="close" data-dismiss="modal" aria-label="Close" #closeCreateCommunicationModal
-                (click)="modalClose()">
-                <span aria-hidden="true">&times;</span>
-            </a>
+        <div class="alert alert-success" role="alert" *ngIf="result">    
             {{ result }}
         </div>
-        <div class="form-group">
+        <!--CREAR PUBLICACION -->
+        <div class="form-group" >
             <div class="col-md-12">
                 <input type="text" class="form-control" id="title" name="title" placeholder="Titulo" ngModel>
             </div>
@@ -58,8 +50,12 @@
                 </div>
             </div>
         </div>
-        <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="modalClose()">Cerrar</button>
+        
+         
+        
+
+
+        <div class="modal-footer" id="bottom">
             <button type="submit" class="btn btn-primary" (click)="modalClose()">Publicar</button>
         </div>
 
