@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { AngularFirestoreCollection, AngularFirestore } from '@angular/fire/firestore';
+import { Communication } from '../communication.model';
+import { Promotion } from '../promotion.model';
+import { CommunicationService } from '../communication.service';
 import { Observable } from 'rxjs';
-import { AngularFireAuth } from '@angular/fire/auth';
-import { firestore } from 'firebase/app';
+import { AngularFirestoreCollection, AngularFirestore } from '@angular/fire/firestore';
 
 @Component({
   selector: 'app-communication-list',
@@ -10,32 +11,17 @@ import { firestore } from 'firebase/app';
   styleUrls: ['./communication-list.component.css']
 })
 export class CommunicationListComponent implements OnInit {
-  dtOptions: DataTables.Settings = {};
-  private communicationDoc: AngularFirestoreCollection<any>;
+  private itemDoc: AngularFirestoreCollection<Communication>;
   communication: Observable<any>;
-  key: string;
-  user: any;
-  viewsCount: number;
+  private promotionDoc: AngularFirestoreCollection<Promotion>;
+  promotion: Observable<any>;
 
-  constructor(private afs: AngularFirestore, private afAuth: AngularFireAuth) {
-    this.user = afAuth.auth.currentUser;
-    this.communicationDoc = this.afs.collection<any>('communications');
-    this.communication = this.communicationDoc.valueChanges();
+  constructor( private afs: AngularFirestore) {
+    this.itemDoc = this.afs.collection<Communication>('communications');
+    this.communication = this.itemDoc.valueChanges();
+    this.promotionDoc = this.afs.collection<Promotion>('promotions');
+    this.promotion = this.promotionDoc.valueChanges();
    }
 
-   ngOnInit() {
-    this.dtOptions = {
-      pagingType: 'full_numbers',
-      pageLength: 10
-    };  
-  }
-  selectKey($event) {
-    this.key = $event.target.innerHTML;
-    let viewsHTML = document.getElementById(this.key).innerHTML
-    console.log(viewsHTML)
-    this.viewsCount =parseInt(viewsHTML)
-    this.afs.doc<any>(`communications/${this.key}`).update({
-      views: firestore.FieldValue.arrayUnion(this.user.uid), viewsCount: this.viewsCount +1
-    });
-  }
+  ngOnInit() {}
 }

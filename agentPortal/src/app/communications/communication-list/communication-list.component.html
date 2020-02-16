@@ -1,54 +1,90 @@
-
 <div class="row">
-  <div class="col-md-12 border-div">
-    <table datatable [dtOptions]="dtOptions" class="row-border hover shadow-sm"
-      *ngIf="communication | async as communication">
-      <thead>
-        <tr class="table-header shadow-sm">
-          <th scope="col"></th>
-          <th scope="col">ID</th>
-          <th scope="col">Publicado Por</th>
-          <th scope="col">Titulo</th>
-          <th scope="col">Vistas</th>
-          <th scope="col">Likes</th>
-          <th scope="col">Dislikes</th>
+    <div class="col-7">
+        <div class="pt-4">
+            <app-create-communication></app-create-communication>
+        </div>
 
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let communication of communication">
-          <th scope="row">
-            <img class="mx-auto rounded-circle user-photo" [src]="communication.uploadedByPhotoURL" alt="">
-          </th>
-          <td>
-            <a (click)="selectKey($event)" data-toggle="modal"
-              data-target="#communicationDetails">{{communication.key}}</a>
-          </td>
-          <td>{{communication.uploadedBy}}</td>
-          <td>{{communication.title}}</td>
-          <td >
-            <i class="fas fa-eye"></i>
-            <span class="badge badge-primary" id="{{communication.key}}">{{communication.viewsCount}}</span>
-          </td>
-          <td>
-            <i class="fas fa-thumbs-up"></i>
-            <span class="badge badge-success">{{communication.likesCount}}</span>
-          </td>
-          <td>
-            <i class="fas fa-thumbs-down"></i>
-            <span class="badge badge-danger">{{communication.dislikesCount}}</span>
-          </td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-</div>
+        <!--- \\\\\\\Post-->
+        <div class="pt-4" *ngIf="communication | async as communication">
+            <div class="card mb-4 shadow" *ngFor="let communication of communication">
+                <div class="card-header">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div class="mr-2">
+                                <img class="rounded-circle" width="45" [src]="communication.userPhotoURL" alt="">
+                            </div>
+                            <div class="ml-2">
+                                <div class="h5 m-0">{{communication.user}}</div>
+                                <div class="h7 text-muted">IT IS Manager</div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="dropdown">
+                                <button class="btn btn-link dropdown-toggle" type="button" id="gedf-drop1"
+                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <i class="fa fa-ellipsis-h"></i>
+                                </button>
+                                <app-communication-detail class="dropdown-menu dropdown-menu-right"
+                                    aria-labelledby="gedf-drop1" [communication]="communication">
+                                </app-communication-detail>
+                            </div>
+                        </div>
+                    </div>
 
-<div class="modal fade" id="communicationDetails" tabindex="-1" role="dialog"
-  aria-labelledby="communicationDetailsLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <app-communication-detail [key]="key"></app-communication-detail>
+                </div>
+                <img [src]="communication.imagePath" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <a class="card-link" href="#">
+                        <h5 class="card-title">{{communication.title}}</h5>
+                    </a>
+
+                    <p class="card-text">
+                        {{ communication.description}}
+                    </p>
+                </div>
+                <div class="card-footer">
+                    <a href="#" class="card-link"><i class="fa fa-gittip"></i> Like</a>
+                    <a href="#" class="card-link"><i class="fa fa-comment"></i> Comment</a>
+                    <a href="#" class="card-link"><i class="fa fa-mail-forward"></i> Share</a>
+                    <div class="text-muted h7 mb-2 float-right"> <i class="fa fa-clock-o"></i>10 min ago</div>
+                </div>
+            </div>
+        </div>
     </div>
-  </div>
-</div>
+
+    <div class="col-5 pt-4" *ngIf="promotion | async as promotion">
+        <div class="card shadow mb-4 " *ngFor="let promotion of promotion">
+
+            <div class="card-header">
+                <div class="d-flex justify-content-between align-items-center">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div class="mr-2">
+                            <img class="rounded-circle" width="30" [src]="promotion.userPhotoURL" alt="">
+                        </div>
+                        <div class="ml-2">
+                            <div class="h6 m-0">{{promotion.user}}</div>
+                            <div class="h7 text-muted">IT IS Manager</div>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="dropdown">
+                            <button class="btn btn-link dropdown-toggle" type="button" id="gedf-drop1"
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="fa fa-ellipsis-h"></i>
+                            </button>
+                            <app-communication-detail class="dropdown-menu dropdown-menu-right"
+                                aria-labelledby="gedf-drop1" [communication]="communication">
+                            </app-communication-detail>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title">{{promotion.title}}</h5>
+                    <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
+                    <p class="card-text">{{promotion.description}}</p>
+                    <a href="#" class="card-link">Card link</a>
+                    <a href="#" class="card-link">Another link</a>
+                </div>
+            </div>
+        </div>
+    </div>
